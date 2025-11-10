@@ -1,0 +1,1 @@
+- add to memory. Add the html formating style (B&w) for future reference.
