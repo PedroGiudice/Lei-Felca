@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdiciona apresentação final Lei Felca - tema Black & White\n\n- Paleta elegante em tons de cinza (não preto/branco puros)\n- Fonte Courier New em todos os textos e títulos (bold)\n- 22 slides totais (expandido de 18)\n- Slides 3-9 expandidos com conteúdo detalhado sobre tramitação\n- Mantém todas funcionalidades: botões, animações, navegação\n- Apresentação acadêmica impecável para PUC-SP\n\nDados adicionados:\n- Slide 3: Caso Felca com números (44-48M views, 243 denúncias)\n- Slide 4: Tramitação 2022-2024 (CDH, CCJ 8 meses, CCDD)\n- Slide 5: Audiências maio/2024 (1 estupro/6min, +202% imagens)\n- Slide 6: Agosto 2025 (32 projetos 48h, CPI 70 assinaturas)\n- Slide 7: Aprovação Câmara (manobra urgência 19/08)\n- Slide 8: Aprovação Senado (4 votos contra 27/08)\n- Slide 9: Sanção (17/09 + MPs complementares)\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
