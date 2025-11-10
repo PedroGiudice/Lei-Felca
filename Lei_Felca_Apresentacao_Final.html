@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lei Felca (Lei nº 15.211/2025) - Estatuto Digital da Criança e do Adolescente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1a1a1a;
+            background-image:
+                radial-gradient(at 20% 30%, rgba(255, 255, 255, 0.03) 0px, transparent 50%),
+                radial-gradient(at 80% 70%, rgba(200, 200, 200, 0.02) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.01) 0px, transparent 70%);
+            color: #e0e0e0;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(200, 200, 200, 0.02) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.01) 0%, transparent 30%);
+            animation: backgroundFlow 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes backgroundFlow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            padding: 20px 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .header h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.4em;
+            background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .slide-counter {
+            background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 100%);
+            color: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .slide-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 40px 60px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            overflow-y: auto;
+            color: #e0e0e0;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            animation: slideContent 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) 0.3s both;
+        }
+
+        @keyframes slideContent {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.previous {
+            transform: translateX(-100%);
+        }
+
+        .slide h2 {
+            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 60%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.4em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .slide h3 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #c0c0c0;
+            font-size: 1.7em;
+            margin: 30px 0 15px 0;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .slide h4 {
+            font-family: 'Courier New', Courier, monospace;
+            color: #a8a8a8;
+            font-size: 1.35em;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        ul {
+            font-family: 'Courier New', Courier, monospace;
+            list-style: none;
+            margin-left: 0;
+        }
+
+        ul li {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateX(4px);
+            color: #ffffff;
+        }
+
+        ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        ul ul li:before {
+            content: "•";
+            font-size: 1.5em;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-track {
+            background: rgba(26, 26, 26, 0.5);
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #888 0%, #666 100%);
+            border-radius: 10px;
+        }
+
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #aaa 0%, #888 100%);
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid #a0a0a0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .highlight-box:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-left-width: 5px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateX(4px);
+        }
+
+        .alert-box {
+            background: rgba(200, 200, 200, 0.05);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid #888;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .alert-box:hover {
+            background: rgba(200, 200, 200, 0.08);
+            border-left-width: 5px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateX(4px);
+        }
+
+        .danger-box {
+            background: rgba(180, 180, 180, 0.05);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid #999;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .danger-box:hover {
+            background: rgba(180, 180, 180, 0.08);
+            border-left-width: 5px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateX(4px);
+        }
+
+        .success-box {
+            background: rgba(220, 220, 220, 0.05);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid #b0b0b0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .success-box:hover {
+            background: rgba(220, 220, 220, 0.08);
+            border-left-width: 5px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transform: translateX(4px);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 1400px) {
+            .grid-2 {
+                gap: 32px;
+            }
+        }
+
+        ::selection {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        button, .card, .timeline-item, .badge {
+            cursor: pointer;
+        }
+
+        a {
+            color: #c0c0c0;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        a:after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a0a0a0, #c0c0c0);
+            transition: width 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        a:hover:after {
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(42, 42, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.4),
+                0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 4px 8px rgba(255, 255, 255, 0.1),
+                0 8px 20px rgba(255, 255, 255, 0.08),
+                0 16px 40px rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card h4 {
+            margin-top: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 20px 0;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #a0a0a0 0%, #808080 100%);
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a0a0a0 0%, #888 100%);
+            border: 3px solid #2a2a2a;
+            box-shadow: 0 0 0 3px rgba(160, 160, 160, 0.2), 0 0 16px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover:before {
+            box-shadow: 0 0 0 5px rgba(160, 160, 160, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.2);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin: 5px 5px 5px 0;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .badge-primary {
+            background: linear-gradient(135deg, #a0a0a0 0%, #888 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(160, 160, 160, 0.3);
+            animation: badgeBreath 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeBreath {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(160, 160, 160, 0.3);
+            }
+            50% {
+                box-shadow: 0 6px 16px rgba(160, 160, 160, 0.5);
+            }
+        }
+
+        .badge-success {
+            background: linear-gradient(135deg, #c0c0c0 0%, #a8a8a8 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
+        }
+
+        .badge-warning {
+            background: linear-gradient(135deg, #b0b0b0 0%, #909090 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(176, 176, 176, 0.3);
+        }
+
+        .badge-danger {
+            background: linear-gradient(135deg, #999 0%, #777 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(153, 153, 153, 0.3);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #3d3d3d;
+        }
+
+        th {
+            background: #2a2a2a;
+            color: #a0a0a0;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #2a2a2a;
+        }
+
+        .navigation {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        button {
+            background: linear-gradient(135deg, #a0a0a0 0%, #888 100%);
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover:before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(160, 160, 160, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: rgba(61, 61, 61, 0.5);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        button:disabled:before {
+            display: none;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(160, 160, 160, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            flex: 1;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a0a0a0 0%, #888 100%);
+            transition: width 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: 0 0 12px rgba(160, 160, 160, 0.6);
+            position: relative;
+            animation: progressGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(160, 160, 160, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(160, 160, 160, 0.8);
+            }
+        }
+
+        .progress-fill:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+            animation: progressShine 2s linear infinite;
+        }
+
+        @keyframes progressShine {
+            0% {
+                right: -30px;
+            }
+            100% {
+                right: 100%;
+            }
+        }
+
+        strong {
+            color: #c0c0c0;
+        }
+
+        p {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .subtitle {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2em;
+            color: #a0a0a0;
+            font-style: italic;
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+
+        @media print {
+            .navigation, .header { display: none; }
+            .slide { position: relative; page-break-after: always; }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 20px; }
+            .header h1 { font-size: 1em; }
+            .slide h2 { font-size: 1.8em; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .slide.active ul li {
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+
+        .slide.active ul li:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active ul li:nth-child(2) { animation-delay: 0.15s; }
+        .slide.active ul li:nth-child(3) { animation-delay: 0.2s; }
+        .slide.active ul li:nth-child(4) { animation-delay: 0.25s; }
+        .slide.active ul li:nth-child(5) { animation-delay: 0.3s; }
+        .slide.active ul li:nth-child(6) { animation-delay: 0.35s; }
+        .slide.active ul li:nth-child(7) { animation-delay: 0.4s; }
+        .slide.active ul li:nth-child(8) { animation-delay: 0.45s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card, .highlight-box, .alert-box, .success-box, .danger-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:after, .highlight-box:after, .alert-box:after, .success-box:after, .danger-box:after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.03) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .card:hover:after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Lei Felca (Lei nº 15.211/2025) - Estatuto Digital da Criança e do Adolescente</h1>
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">22</span>
+            </div>
+        </div>
+
+        <div class="slide-container">
+            <!-- SLIDE 1: TÍTULO -->
+            <div class="slide active">
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%); pointer-events: none; animation: backgroundPulse 8s ease-in-out infinite;"></div>
+
+                    <h2 style="font-size: 4.5em; border: none; margin-bottom: 20px; background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 50%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: titlePulse 3s ease-in-out infinite; position: relative; z-index: 1; font-weight: 800; letter-spacing: -0.04em; text-shadow: 0 0 60px rgba(255, 255, 255, 0.15);">LEI FELCA</h2>
+
+                    <p style="font-size: 2em; background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; font-weight: 600;">Lei nº 15.211/2025</p>
+
+                    <p style="font-size: 1.6em; color: #a0a0a0; margin-bottom: 50px; font-weight: 300;">Estatuto Digital da Criança e do Adolescente</p>
+
+                    <div class="highlight-box" style="max-width: 800px; text-align: left; backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <p style="font-size: 1.3em; line-height: 1.8;"><strong>Marco regulatório inédito</strong> na proteção de crianças e adolescentes em ambientes digitais no Brasil</p>
+                    </div>
+
+                    <div style="margin-top: 50px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                        <span class="badge badge-primary" style="font-size: 1em; padding: 10px 20px;">⏰ Vigência: 17 de março de 2026</span>
+                        <span class="badge badge-success" style="font-size: 1em; padding: 10px 20px;">✅ Sancionada: 17 de setembro de 2025</span>
+                    </div>
+
+                    <div style="margin-top: 25px;">
+                        <span class="badge badge-warning" style="font-size: 0.95em; padding: 8px 16px;">🎓 PUC-SP - Direito Digital</span>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                @keyframes titlePulse {
+                    0%, 100% {
+                        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.15);
+                    }
+                    50% {
+                        text-shadow: 0 0 30px rgba(255, 255, 255, 0.35), 0 0 60px rgba(255, 255, 255, 0.25);
+                    }
+                }
+                @keyframes backgroundPulse {
+                    0%, 100% {
+                        transform: scale(1);
+                        opacity: 0.5;
+                    }
+                    50% {
+                        transform: scale(1.1);
+                        opacity: 0.8;
+                    }
+                }
+            </style>
+
+            <!-- SLIDE 2: CONTEXTO -->
+            <div class="slide">
+                <h2>Contexto e Integração Normativa</h2>
+
+                <div class="highlight-box">
+                    <h4>Fundamento Constitucional</h4>
+                    <ul>
+                        <li><strong>Art. 227, CF/88:</strong> Princípio da Proteção Integral</li>
+                        <li>Dever da família, sociedade e Estado de proteger crianças e adolescentes</li>
+                        <li>Prioridade absoluta dos direitos da criança e do adolescente</li>
+                    </ul>
+                </div>
+
+                <h3>Arcabouço Normativo</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🏛️ ECA - Lei 8.069/1990</h4>
+                        <ul>
+                            <li>Estatuto da Criança e do Adolescente</li>
+                            <li>Base principiológica da proteção integral</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 Marco Civil - Lei 12.965/2014</h4>
+                        <ul>
+                            <li>Neutralidade de rede</li>
+                            <li>Responsabilidade de provedores</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔒 LGPD - Lei 13.709/2018</h4>
+                        <ul>
+                            <li>Proteção de dados pessoais</li>
+                            <li>Privacidade por padrão</li>
+                            <li>Consentimento específico para menores</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>👶 Lei Felca - Lei 15.211/2025</h4>
+                        <ul>
+                            <li><strong>Complementa</strong> e <strong>especifica</strong></li>
+                            <li>Foco na vulnerabilidade digital infantil</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="success-box" style="margin-top: 20px;">
+                    <h4>📋 Resolução CONANDA nº 245/2024</h4>
+                    <ul>
+                        <li>Reconhece ambiente digital como <strong>espaço de cidadania</strong></li>
+                        <li>Estabelece diretrizes interpretativas respeitando desenvolvimento de cada faixa etária</li>
+                        <li>Exige linguagem acessível e relatórios de conformidade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: O CASO FELCA - EXPANDIDO -->
+            <div class="slide">
+                <h2>Origem: O Caso que Mobilizou o Brasil</h2>
+
+                <div class="alert-box">
+                    <h4>📹 6 de agosto de 2025</h4>
+                    <p><strong>Felipe Bressanim Pereira (Felca)</strong> publica vídeo "Adultização" no YouTube</p>
+                    <ul>
+                        <li>Duração: 50 minutos</li>
+                        <li><strong>44-48 milhões de visualizações</strong> em poucos dias</li>
+                        <li><strong>+200 milhões</strong> somando todas as plataformas</li>
+                        <li>Seguidores de Felca: <strong>crescimento de 52% em 6 dias</strong> (ganho de 10,3 milhões)</li>
+                        <li>Impacto: comoção nacional e pressão legislativa imediata</li>
+                    </ul>
+                </div>
+
+                <h3>Principais Denúncias</h3>
+                <ul>
+                    <li><strong>Sexualização precoce</strong> e exploração de menores por influenciadores adultos</li>
+                    <li><strong>Caso Hytalo Santos:</strong> reality show com adolescentes em ambientes com álcool e conotação sexual</li>
+                    <li><strong>Kamylinha Santos (17 anos):</strong> aparecendo em conteúdos desde os 12 anos</li>
+                    <li><strong>"Algoritmo P":</strong> recomendação de conteúdos sexualizados de menores para usuários adultos</li>
+                    <li><strong>Monetização sistemática</strong> da exploração infantil</li>
+                    <li><strong>Omissão das plataformas</strong> em moderar e remover conteúdo abusivo</li>
+                </ul>
+
+                <h3>Consequências Imediatas</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>⚖️ Ações Judiciais</h4>
+                        <ul>
+                            <li><strong>8 de agosto:</strong> Suspensão de contas de Hytalo Santos (Instagram e TikTok)</li>
+                            <li><strong>15 de agosto:</strong> Prisão de Hytalo Santos e Israel Natã Vicente em Carapicuíba/SP</li>
+                            <li>Suspeita de tráfico de pessoas e exploração sexual infantil</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📊 Impacto Social</h4>
+                        <ul>
+                            <li><strong>243 novas denúncias</strong> ao MinDH após o vídeo (de 261 totais em agosto)</li>
+                            <li>Hashtags dominando trending topics</li>
+                            <li>Mobilização massiva nas redes sociais</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: TRAMITAÇÃO - FASE INICIAL (2022-2024) -->
+            <div class="slide">
+                <h2>Tramitação Legislativa: Fase Inicial (2022-2024)</h2>
+
+                <div class="highlight-box">
+                    <h4>📜 PL 2.628/2022 - Sen. Alessandro Vieira (MDB-SE)</h4>
+                    <p>Projeto <strong>anterior ao caso Felca</strong> - ficou quase 3 anos em tramitação</p>
+                </div>
+
+                <h3>Longa Tramitação no Senado</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">18 de outubro de 2022</div>
+                        <p><strong>Apresentação</strong> do PL 2.628/2022 - estabelecer regras para proteção de crianças/adolescentes em ambientes digitais</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">28 de abril de 2023</div>
+                        <p><strong>Sen. Flávio Arns (PSB-PR)</strong> designado relator na CDH</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">14 de junho de 2023</div>
+                        <p><strong>Aprovação na CDH</strong> - Parecer nº 50/2023-CDH</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">21 de junho de 2023</div>
+                        <p>Encaminhado à CCJ - <strong>Sen. Jorge Kajuru (PSB-GO)</strong> relator</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Nov 2023 - Fev 2024</div>
+                        <p><strong>8 meses de negociações</strong> - Kajuru reformulou relatório 4 vezes, questões sobre publicidade infantil</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">21 de fevereiro de 2024</div>
+                        <p><strong>Aprovação na CCJ</strong> com urgência - 4 senadores votaram contra (Esperidião Amin, Sergio Moro, Oriovisto Guimarães, Flávio Bolsonaro)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">22 de fevereiro de 2024</div>
+                        <p><strong>Redespacho estratégico</strong> para CCDD (Comissão de Comunicação e Direito Digital) - Sen. Flávio Arns novamente relator</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: TRAMITAÇÃO - AUDIÊNCIAS E APROVAÇÃO SENADO -->
+            <div class="slide">
+                <h2>Tramitação: Audiências Públicas e Aprovação (2024)</h2>
+
+                <h3>Audiências Públicas na CCDD</h3>
+                <div class="alert-box">
+                    <h4>📅 14 e 15 de maio de 2024</h4>
+                    <ul>
+                        <li><strong>12 requerimentos</strong> para inclusão de convidados (interesse transpartidário)</li>
+                        <li><strong>50+ participantes:</strong> Abragames, ANPD, MJSP, Data Privacy Brasil, SaferNet Brasil, Instituto Alana</li>
+                        <li><strong>Big techs:</strong> Google, Meta, TikTok, Kwai, Discord</li>
+                        <li><strong>25 notas técnicas</strong> enviadas ao relator (via Conselho Digital) pedindo flexibilização</li>
+                    </ul>
+                </div>
+
+                <h3>Dados Alarmantes Apresentados</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🚨 Violência Sexual</h4>
+                        <ul>
+                            <li><strong>1 estupro a cada 6 minutos</strong> no Brasil</li>
+                            <li><strong>80% das vítimas</strong> são crianças e adolescentes</li>
+                            <li><strong>+202%</strong> aumento circulação imagens abuso</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📱 Uso de Internet</h4>
+                        <ul>
+                            <li><strong>9h15 diárias</strong> média brasileira (vs 6h37 mundial)</li>
+                            <li><strong>3h37</strong> em redes sociais</li>
+                            <li><strong>71 mil denúncias</strong> abuso sexual infantil (2023)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline" style="margin-top: 20px;">
+                    <div class="timeline-item">
+                        <div class="timeline-date">27 de novembro de 2024</div>
+                        <p><strong>Aprovação na CCDD</strong> - 21 emendas analisadas, Substitutivo aprovado</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">10 de dezembro de 2024</div>
+                        <p><strong>Projeto enviado à Câmara</strong> após quase 3 anos no Senado</p>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <p><strong>✅ Consenso técnico alcançado</strong> após amplo debate com sociedade civil, setor privado e especialistas</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: PERÍODO CATALISADOR - AGOSTO 2025 -->
+            <div class="slide">
+                <h2>Período Catalisador: Agosto de 2025</h2>
+                <p class="subtitle">Do vídeo de Felca à aprovação: aceleração sem precedentes</p>
+
+                <div class="danger-box">
+                    <h4>⚡ 43 DIAS DO VÍDEO À SANÇÃO</h4>
+                    <p>A mobilização social transformou projeto estagnado em lei aprovada com velocidade recorde</p>
+                </div>
+
+                <h3>Mobilização Parlamentar Explosiva</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📝 Novos Projetos</h4>
+                        <ul>
+                            <li><strong>25 projetos</strong> apresentados em 11/08 (segunda-feira)</li>
+                            <li><strong>32 projetos totais</strong> em 48 horas</li>
+                            <li>Todos sobre proteção infantil digital</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏛️ CPI Instalada</h4>
+                        <ul>
+                            <li><strong>70 assinaturas</strong> (número recorde)</li>
+                            <li>Sen. Jaime Bagattoli e Damares Alves</li>
+                            <li>Foco em "adultização" nas redes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Reação do Congresso</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">10 de agosto (fim de semana)</div>
+                        <p><strong>Hugo Motta (Pres. Câmara):</strong> "O vídeo do Felca chocou e mobilizou milhões. Na Câmara, vamos pautar e enfrentar essa discussão"</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">12 de agosto</div>
+                        <p><strong>Comissão Geral convocada</strong> para 20/08 + grupo de trabalho (prazo 30 dias)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">12 de agosto</div>
+                        <p><strong>Sen. Alessandro Vieira:</strong> "É hora de pautar e aprovar o projeto 2628. Casos como o denunciado mostram realidade gravíssima"</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">19 de agosto</div>
+                        <p><strong>Audiência na Segurança Pública</strong> - Delegada PF apresenta dados alarmantes (estupro a cada 6 min, +202% imagens abuso)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: APROVAÇÃO NA CÂMARA -->
+            <div class="slide">
+                <h2>Aprovação na Câmara dos Deputados</h2>
+
+                <h3>Manobra Estratégica de Urgência</h3>
+                <div class="alert-box">
+                    <h4>⚡ 19 de agosto de 2025</h4>
+                    <p><strong>Hugo Motta aprovou urgência de forma simbólica</strong> antes que maioria da oposição chegasse ao plenário</p>
+                    <ul>
+                        <li>Impediu votação nominal e obstruções</li>
+                        <li>Requerimento apresentado por <strong>Dep. Laura Carneiro (PSD-RJ)</strong> em 6 de maio</li>
+                        <li>Regime alterado de "Prioridade" para "Urgência (Art. 155, RICD)"</li>
+                        <li>Permitiu tramitação direta no Plenário sem comissões</li>
+                    </ul>
+                </div>
+
+                <h3>Comissão Geral e Votação</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">20 de agosto - Manhã</div>
+                        <p><strong>Comissão Geral:</strong> Min. Macaé Evaristo (DHC), João Brant (Secom), representantes big techs, MP, CONANDA</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">20 de agosto - 13h55</div>
+                        <p>Sessão Deliberativa iniciada - ordem do dia às <strong>19h24</strong></p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">20 de agosto - 19h24:47</div>
+                        <p><strong>Substitutivo publicado</strong> no sistema - <strong>47 segundos depois</strong> Hugo Motta abriu ordem do dia</p>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h4>✅ Aprovação em Votação Simbólica</h4>
+                    <ul>
+                        <li><strong>17 emendas de plenário</strong> apresentadas</li>
+                        <li><strong>6 destaques retirados</strong> após negociações</li>
+                        <li><strong>Consenso transpartidário</strong> após incorporação de demandas da oposição</li>
+                        <li>Apenas <strong>Partido Novo</strong> manteve oposição consistente</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Dep. Kim Kataguiri:</strong> "O projeto aprovado está mil vezes melhor do que o governo propôs. O total controle que o governo queria foi desmontado pelo relator."</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: APROVAÇÃO NO SENADO -->
+            <div class="slide">
+                <h2>Retorno e Aprovação Final no Senado</h2>
+
+                <h3>Tramitação Acelerada</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">21 de agosto de 2025</div>
+                        <p>Texto aprovado pela Câmara retorna ao Senado</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">26 de agosto</div>
+                        <p><strong>Davi Alcolumbre (Pres. Senado)</strong> aprova pedido de urgência de Alessandro Vieira</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">27 de agosto - Sessão</div>
+                        <p><strong>Gesto simbólico:</strong> Alcolumbre cede presidência temporária a Alessandro Vieira para conduzir votação de seu próprio projeto</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎙️ Discurso de Davi Alcolumbre</h4>
+                    <p style="font-style: italic;">"É um gesto da Presidência em reconhecer a atuação do senador Alessandro Vieira, que construiu essa agenda nos últimos três anos, liderando esse processo e enfrentando um debate extremamente difícil."</p>
+                </div>
+
+                <h3>Modificações Estratégicas pelo Relator</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🎰 Loot Boxes</h4>
+                        <p><strong>Restabeleceu proibição total</strong> que a Câmara havia flexibilizado</p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">"Não existem limites seguros para crianças/adolescentes" - Sen. Flávio Arns</p>
+                    </div>
+                    <div class="card">
+                        <h4>🚨 Remoção Imediata</h4>
+                        <p>Incluiu obrigação de <strong>remoção imediata</strong> de conteúdos de abuso sexual, sequestro, aliciamento</p>
+                        <p style="margin-top: 10px; font-size: 0.95em;">Crucial não prevista no texto da Câmara</p>
+                    </div>
+                </div>
+
+                <h3>Votação Final</h3>
+                <div class="danger-box">
+                    <h4>✅ Aprovação com Apenas 4 Votos Contrários</h4>
+                    <p><strong>Votação simbólica</strong> - ampla maioria favorável</p>
+                    <p><strong>Votos contrários:</strong></p>
+                    <ul>
+                        <li>Sen. Carlos Portinho (PL-RJ)</li>
+                        <li>Sen. Eduardo Girão (Novo-CE)</li>
+                        <li>Sen. Jaime Bagattoli (PL-RO)</li>
+                        <li>Sen. Luis Carlos Heinze (PP-RS)</li>
+                    </ul>
+                </div>
+
+                <div class="alert-box">
+                    <p><strong>Sen. Carlos Portinho:</strong> "Depois que abrir essa porteira, o controle das redes sociais não se fecha mais. O maior controle é dos pais."</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: SANÇÃO PRESIDENCIAL -->
+            <div class="slide">
+                <h2>Sanção Presidencial e Atos Complementares</h2>
+
+                <div class="success-box">
+                    <h4>📅 17 de setembro de 2025 - Palácio do Planalto</h4>
+                    <p><strong>Lei nº 15.211/2025 sancionada</strong> com presença de Lula, Alckmin, Min. Macaé Evaristo, Sen. Alessandro Vieira, diretores ANPD</p>
+                </div>
+
+                <h3>Discurso Presidencial - Principais Pontos</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li><strong>"Passados 35 anos do ECA original, o mundo mudou muito"</strong> - necessidade de modernizar marcos legais</li>
+                        <li><strong>"Redes digitais não estão acima da lei"</strong> - não podem espalhar fake news, discursos de ódio ou crimes</li>
+                        <li><strong>"Soberania digital do Brasil"</strong> - portas abertas para empresas que respeitem proteção infantil</li>
+                        <li>Elogio ao Parlamento por "fazer coisa séria quando provocado"</li>
+                    </ul>
+                </div>
+
+                <h3>Atos Complementares Simultâneos</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📜 MP 1.317/2025</h4>
+                        <ul>
+                            <li><strong>ANPD vira Agência Reguladora</strong></li>
+                            <li>12ª agência reguladora federal</li>
+                            <li>200 cargos de Especialista</li>
+                            <li>Remuneração: R$ 17.726,42</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📜 MP 1.318/2025</h4>
+                        <ul>
+                            <li><strong>REDATA</strong> (datacenters sustentáveis)</li>
+                            <li>Renúncia: R$ 7,5 bi em 3 anos</li>
+                            <li>Expectativa: R$ 2 trilhões investimento privado</li>
+                            <li>Contexto: soberania digital</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📜 MP 1.319/2025</h4>
+                        <ul>
+                            <li><strong>Reduz prazo de vigência</strong></li>
+                            <li>De 12 meses para <strong>6 meses</strong></li>
+                            <li>Vigência: <strong>17 de março de 2026</strong></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📜 Decreto 12.622/2025</h4>
+                        <ul>
+                            <li><strong>Governança de bloqueios</strong></li>
+                            <li>ANPD + Judiciário + Anatel + CGI.br</li>
+                            <li>Estrutura de fiscalização</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: ÂMBITO DE APLICAÇÃO -->
+            <div class="slide">
+                <h2>Âmbito de Aplicação (Art. 1º)</h2>
+
+                <div class="highlight-box">
+                    <h4>🎯 Abrangência</h4>
+                    <p><strong>Todo produto ou serviço de tecnologia da informação</strong> direcionado a crianças/adolescentes no Brasil ou de <strong>acesso provável</strong> por eles, independentemente de localização, desenvolvimento, fabricação, oferta ou operação.</p>
+                </div>
+
+                <h3>Conceito de "Acesso Provável" (Art. 1º, parágrafo único)</h3>
+                <ul>
+                    <li>✅ Suficiente <strong>probabilidade de uso</strong> e atratividade do produto por menores</li>
+                    <li>✅ Considerável <strong>facilidade de acesso</strong> e utilização por crianças/adolescentes</li>
+                    <li>✅ Significativo grau de <strong>risco à privacidade</strong>, segurança ou desenvolvimento biopsicossocial</li>
+                </ul>
+
+                <h3>Produtos e Serviços Abrangidos</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📱 Redes Sociais</h4>
+                        <ul>
+                            <li>Instagram, TikTok, Facebook</li>
+                            <li>Twitter/X, Threads</li>
+                            <li>Snapchat, BeReal</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>💬 Mensagens</h4>
+                        <ul>
+                            <li>WhatsApp, Telegram</li>
+                            <li>Discord, Signal</li>
+                            <li>Qualquer app de chat</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎮 Jogos Eletrônicos</h4>
+                        <ul>
+                            <li>Jogos online/offline</li>
+                            <li>Plataformas de gaming</li>
+                            <li>Apps de entretenimento</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎥 Plataformas de Vídeo</h4>
+                        <ul>
+                            <li>YouTube, Twitch</li>
+                            <li>Streamings em geral</li>
+                            <li>Apps de lojas, sistemas operacionais</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: PRINCÍPIOS -->
+            <div class="slide">
+                <h2>Princípios Fundamentais (Art. 4º)</h2>
+
+                <p class="subtitle">A utilização de tecnologia por crianças/adolescentes tem como fundamentos:</p>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🛡️ Proteção Integral</h4>
+                        <ul>
+                            <li>Garantia de proteção absoluta</li>
+                            <li>Prevalência dos interesses dos menores</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🧠 Desenvolvimento</h4>
+                        <ul>
+                            <li>Condição peculiar de pessoa em desenvolvimento biopsicossocial</li>
+                            <li>Respeito à autonomia progressiva</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔐 Segurança</h4>
+                        <ul>
+                            <li>Contra intimidação, exploração, abuso e violência</li>
+                            <li>Ambientes digitais seguros</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>💼 Anti-Exploração</h4>
+                        <ul>
+                            <li>Proteção contra exploração comercial</li>
+                            <li>Vedação de práticas predatórias</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>♿ Inclusão</h4>
+                        <ul>
+                            <li>Observância dos princípios do Estatuto da Pessoa com Deficiência</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📚 Educação Digital</h4>
+                        <ul>
+                            <li>Promoção com foco em cidadania</li>
+                            <li>Desenvolvimento de senso crítico</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 Transparência</h4>
+                        <ul>
+                            <li>No tratamento de dados pessoais</li>
+                            <li>Clareza nas políticas e práticas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: OBRIGAÇÕES - PARTE 1 -->
+            <div class="slide">
+                <h2>Obrigações das Plataformas Digitais (1/3)</h2>
+
+                <h3>1. Vinculação de Contas a Responsáveis (Art. 11)</h3>
+                <div class="danger-box">
+                    <p><strong>🔴 OBRIGATÓRIO:</strong> Contas de crianças e adolescentes <strong>até 16 anos</strong> devem estar vinculadas à conta de um responsável legal.</p>
+                </div>
+
+                <h3>2. Verificação de Idade (Art. 5º, §1º e Art. 12)</h3>
+                <div class="highlight-box">
+                    <h4>Requisitos:</h4>
+                    <ul>
+                        <li><strong>Mecanismos confiáveis</strong> de verificação de idade</li>
+                        <li><strong>❌ VEDADA</strong> a autodeclaração como método único</li>
+                        <li>Verificação necessária <strong>a cada acesso</strong> ao conteúdo impróprio</li>
+                        <li>Dados coletados <strong>só podem</strong> ser usados para verificação de idade</li>
+                    </ul>
+                </div>
+
+                <h3>3. Ferramentas de Supervisão Parental (Art. 18)</h3>
+                <p>As plataformas devem disponibilizar ferramentas que permitam aos pais/responsáveis:</p>
+                <ul>
+                    <li>📊 Visualizar, configurar e gerenciar opções de conta e privacidade</li>
+                    <li>💳 Restringir compras e transações financeiras</li>
+                    <li>👤 Identificar perfis de adultos com os quais o menor se comunica</li>
+                    <li>⏱️ Acessar métricas do tempo total de uso</li>
+                    <li>🔧 Ativar/desativar salvaguardas de segurança</li>
+                    <li>🇧🇷 Dispor de informações e controles <strong>em língua portuguesa</strong></li>
+                </ul>
+            </div>
+
+            <!-- SLIDE 13: OBRIGAÇÕES - PARTE 2 -->
+            <div class="slide">
+                <h2>Obrigações das Plataformas Digitais (2/3)</h2>
+
+                <h3>4. Remoção Imediata de Conteúdo Abusivo (Art. 26 e 27)</h3>
+                <div class="danger-box">
+                    <h4>🚨 OBRIGAÇÃO CRÍTICA</h4>
+                    <p>Remoção <strong>imediata</strong> + notificação às autoridades quando identificados conteúdos de:</p>
+                    <ul>
+                        <li>❌ Abuso sexual de menores</li>
+                        <li>❌ Sequestro ou aliciamento</li>
+                        <li>❌ Exploração infantil</li>
+                    </ul>
+                </div>
+
+                <h3>5. Proteção contra Publicidade Abusiva (Art. 22 e 23)</h3>
+                <div class="highlight-box">
+                    <h4>Vedações Absolutas:</h4>
+                    <ul>
+                        <li>❌ Criação de <strong>perfis comportamentais</strong> de menores para publicidade direcionada</li>
+                        <li>❌ Uso de técnicas de <strong>perfilamento</strong> para direcionamento comercial</li>
+                        <li>❌ Emprego de <strong>análise emocional</strong>, realidade aumentada/virtual para publicidade</li>
+                        <li>❌ <strong>Monetização e impulsionamento</strong> de conteúdos que retratem crianças/adolescentes de forma erotizada, sexualmente sugestiva ou em contexto do universo sexual adulto</li>
+                    </ul>
+                </div>
+
+                <div class="alert-box">
+                    <p><strong>⚖️ Fundamento:</strong> Proteção contra exploração comercial e manipulação de menores em situação de vulnerabilidade cognitiva e emocional</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 14: OBRIGAÇÕES - PARTE 3 -->
+            <div class="slide">
+                <h2>Obrigações das Plataformas Digitais (3/3)</h2>
+
+                <h3>6. Proibição de Loot Boxes (Art. 20)</h3>
+                <div class="danger-box">
+                    <h4>🎰 VEDAÇÃO ABSOLUTA</h4>
+                    <p><strong>Proibidas completamente</strong> as "caixas de recompensa" (loot boxes) em jogos eletrônicos direcionados ou de acesso provável por menores.</p>
+                    <ul>
+                        <li><strong>Fundamento:</strong> Mecanismos incentivam comportamentos compulsivos</li>
+                        <li>Configuram práticas predatórias</li>
+                        <li><strong>Inovação mundial:</strong> pioneira na proibição absoluta</li>
+                    </ul>
+                </div>
+
+                <h3>7. Relatórios de Transparência (Art. 17)</h3>
+                <div class="highlight-box">
+                    <p>Redes sociais com <strong>mais de 1 milhão</strong> de usuários crianças/adolescentes devem publicar <strong>relatórios semestrais</strong> contendo:</p>
+                    <ul>
+                        <li>📊 Dados sobre denúncias recebidas</li>
+                        <li>🗑️ Conteúdos moderados/removidos</li>
+                        <li>⚙️ Ações de gestão de riscos à segurança e saúde de menores</li>
+                    </ul>
+                </div>
+
+                <h3>8. Design Seguro desde a Concepção (Art. 5º, §1º)</h3>
+                <div class="success-box">
+                    <h4>🗝️ Princípio "Safety and Privacy by Design"</h4>
+                    <ul>
+                        <li>Produtos devem operar, desde a concepção, com configuração <strong>mais protetiva</strong></li>
+                        <li>Nível mais alto de privacidade <strong>por padrão</strong> para público infantil</li>
+                        <li>Medidas técnicas adequadas e amplamente reconhecidas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 15: CONTEÚDOS VEDADOS -->
+            <div class="slide">
+                <h2>Conteúdos Vedados/Inadequados (Art. 5º, §2º)</h2>
+
+                <p class="subtitle">Conteúdos impróprios para menores de 18 anos exigem verificação de idade</p>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>🔞 Sexual e Adulto</h4>
+                        <ul>
+                            <li>Material pornográfico ou sexualmente explícito</li>
+                            <li>Conteúdo erotizado</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>⚔️ Violência</h4>
+                        <ul>
+                            <li>Violência gráfica ou extrema</li>
+                            <li>Conteúdo perturbador</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>😢 Saúde Mental</h4>
+                        <ul>
+                            <li>Bullying</li>
+                            <li>Incentivo à automutilação/suicídio</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎰 Jogos e Vícios</h4>
+                        <ul>
+                            <li>Jogos de azar, apostas</li>
+                            <li>Produtos viciantes</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🚬 Produtos Proibidos</h4>
+                        <ul>
+                            <li>Cigarros, vapes</li>
+                            <li>Bebidas alcoólicas</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Publicidade Abusiva</h4>
+                        <ul>
+                            <li>Práticas predatórias</li>
+                            <li>Publicidade injusta ou enganosa</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>💬 Discurso de Ódio</h4>
+                        <ul>
+                            <li>Incitação à discriminação</li>
+                            <li>Conteúdo extremista</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <p><strong>⚠️ Desafio Regulatório:</strong> Conceito amplo e subjetivo do que é "inadequado" para diferentes faixas etárias. Regulamentação da ANPD e Resolução CONANDA nº 245/2024 trazem diretrizes, mas ainda carecem de detalhamento prático.</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 16: ANPD -->
+            <div class="slide">
+                <h2>ANPD como Autoridade Fiscalizadora</h2>
+
+                <h3>Transformação Institucional</h3>
+                <div class="highlight-box">
+                    <h4>🏛️ MP nº 1.317/2025 + Decreto nº 12.622/2025</h4>
+                    <p>Transformação da <strong>Autoridade Nacional de Proteção de Dados (ANPD)</strong> em <strong>Agência Nacional de Proteção de Dados</strong> (mantém a sigla)</p>
+                    <ul>
+                        <li>Agência reguladora com autonomia funcional, técnica, decisória, administrativa e financeira</li>
+                        <li>Autoridade administrativa autônoma responsável pela proteção de crianças/adolescentes em ambientes digitais</li>
+                    </ul>
+                </div>
+
+                <h3>Competências Ampliadas</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📋 Regulamentação</h4>
+                        <ul>
+                            <li>Editar regulamentos e procedimentos específicos</li>
+                            <li>Promover consultas públicas</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 Fiscalização</h4>
+                        <ul>
+                            <li>Fiscalizar cumprimento por empresas de tecnologia</li>
+                            <li>Auditar mecanismos de verificação de idade</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>⚖️ Sanções</h4>
+                        <ul>
+                            <li>Aplicar sanções administrativas</li>
+                            <li>Determinar retirada célere de conteúdos</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📊 Transparência</h4>
+                        <ul>
+                            <li>Exigir relatórios de transparência</li>
+                            <li>Zelar pela aplicação da Lei Felca</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Coordenação Institucional</h3>
+                <p>A ANPD deve atuar de forma <strong>coordenada</strong> com:</p>
+                <ul>
+                    <li>⚖️ Ministério Público (Federal e Estaduais)</li>
+                    <li>🏢 Conselhos Tutelares</li>
+                    <li>🛡️ Órgãos de defesa do consumidor</li>
+                    <li>🚨 Polícia Federal</li>
+                    <li>👨‍⚖️ Defensoria Pública da União</li>
+                    <li>📡 ANATEL (execução de bloqueios)</li>
+                </ul>
+            </div>
+
+            <!-- SLIDE 17: SANÇÕES -->
+            <div class="slide">
+                <h2>Sanções Administrativas (Art. 35)</h2>
+
+                <h3>Tipos de Penalidades</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">1. Advertência</div>
+                        <p>Prazo de até <strong>30 dias</strong> para medidas corretivas</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2. Multa Simples</div>
+                        <ul>
+                            <li>Até <strong>10% do faturamento</strong> do grupo econômico no Brasil no último exercício</li>
+                            <li><strong>OU</strong>, ausente faturamento: R$ 10 a R$ 1.000 por usuário cadastrado</li>
+                            <li><strong>Limite máximo:</strong> R$ 50.000.000,00 por infração</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">3. Suspensão Temporária</div>
+                        <p>Das atividades relacionadas à infração</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">4. Proibição de Exercício</div>
+                        <p>Das atividades infratoras</p>
+                    </div>
+                </div>
+
+                <h3>Critérios para Dosimetria (Art. 35, §1º)</h3>
+                <ul>
+                    <li>⚖️ Gravidade da infração (motivos e extensão do dano)</li>
+                    <li>🔄 Reincidência</li>
+                    <li>💰 Capacidade econômica do infrator</li>
+                    <li>🎯 Finalidade social do provedor</li>
+                    <li>👥 Impacto causado à coletividade</li>
+                    <li>📏 Princípios da proporcionalidade e razoabilidade</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>💰 Destinação dos Recursos (MP 1.318/2025)</h4>
+                    <p>Valores das multas serão destinados ao <strong>Fundo Nacional para a Criança e o Adolescente</strong> (Lei nº 8.242/1991) pelo prazo de <strong>5 anos</strong>, para financiar políticas de proteção e projetos voltados ao ambiente digital</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 18: RESPONSABILIDADE -->
+            <div class="slide">
+                <h2>Responsabilidade Solidária</h2>
+
+                <div class="danger-box">
+                    <h4>⚠️ Art. 15: Responsabilidade Solidária na Cadeia Digital</h4>
+                    <p><strong>Todos os agentes</strong> da cadeia digital respondem solidariamente por violações à Lei Felca</p>
+                </div>
+
+                <h3>Agentes Responsáveis</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>👨‍💻 Desenvolvedores</h4>
+                        <ul>
+                            <li>Criadores de apps</li>
+                            <li>Desenvolvedores de jogos</li>
+                            <li>Programadores de plataformas</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏪 Lojas de Apps</h4>
+                        <ul>
+                            <li>Google Play Store</li>
+                            <li>Apple App Store</li>
+                            <li>Outras lojas de aplicativos</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📱 Sistemas Operacionais</h4>
+                        <ul>
+                            <li>Android, iOS</li>
+                            <li>Windows, macOS</li>
+                            <li>Sistemas embarcados</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 Provedores de Internet</h4>
+                        <ul>
+                            <li>ISPs</li>
+                            <li>Provedores de hospedagem</li>
+                            <li>CDNs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Empresas Estrangeiras (Art. 35, §3º e Art. 40)</h3>
+                <div class="highlight-box">
+                    <ul>
+                        <li>✅ Empresas estrangeiras respondem <strong>solidariamente</strong> por meio de suas filiais ou escritórios no Brasil</li>
+                        <li>✅ <strong>Obrigação:</strong> Manter representante legal no país com poderes para receber citações, intimações e responder perante autoridades</li>
+                        <li>✅ Facilita fiscalização e aplicação de sanções</li>
+                    </ul>
+                </div>
+
+                <div class="alert-box">
+                    <p><strong>🤔 Desafio Prático:</strong> Como operacionalizar responsabilização quando há múltiplos atores na cadeia? Regulamentação da ANPD deverá detalhar procedimentos</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 19: VETOS -->
+            <div class="slide">
+                <h2>Vetos Presidenciais</h2>
+
+                <p class="subtitle">O Presidente Lula vetou 3 dispositivos da Lei aprovada pelo Congresso</p>
+
+                <div class="grid-2" style="grid-template-columns: 1fr;">
+                    <div class="card">
+                        <h4>❌ Veto 1: Prazo de Vigência (Art. 41 - original)</h4>
+                        <p><strong>Dispositivo vetado:</strong> Entrada em vigor após <strong>12 meses</strong></p>
+                        <p><strong>Razão:</strong> Prazo incompatível com urgência da proteção de menores</p>
+                        <div class="success-box" style="margin-top: 15px;">
+                            <p><strong>✅ Solução:</strong> MP 1.319/2025 antecipou vigência para <strong>6 meses</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>❌ Veto 2: Atribuição à ANATEL (Art. 36)</h4>
+                        <p><strong>Dispositivo vetado:</strong> ANATEL seria responsável por encaminhar ordens de bloqueio de plataformas infratoras</p>
+                        <p><strong>Razão:</strong> Violação à competência privativa do Presidente sobre organização/funcionamento da administração federal</p>
+                        <div class="success-box" style="margin-top: 15px;">
+                            <p><strong>✅ Solução:</strong> Decreto 12.622/2025 manteve ANATEL com mesma atribuição, mas via ato do Executivo</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h4>❌ Veto 3: Destinação Imediata de Recursos (Art. 35, §6º)</h4>
+                        <p><strong>Dispositivo vetado:</strong> Destinação <strong>imediata</strong> das multas ao Fundo da Criança e do Adolescente</p>
+                        <p><strong>Razão:</strong> Necessidade de flexibilidade orçamentária e administrativa</p>
+                        <div class="success-box" style="margin-top: 15px;">
+                            <p><strong>✅ Solução:</strong> MP 1.318/2025 estabeleceu destinação por prazo de <strong>5 anos</strong> (não imediata)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <p><strong>⚖️ Status:</strong> Vetos aguardam análise pelo Congresso Nacional, que pode mantê-los ou derrubá-los por maioria absoluta</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 20: CRÍTICAS E DESAFIOS -->
+            <div class="slide">
+                <h2>Críticas e Desafios (1/2)</h2>
+
+                <h3>✅ Argumentos Favoráveis</h3>
+                <div class="success-box">
+                    <ul>
+                        <li>🏆 Marco histórico na proteção infantil digital</li>
+                        <li>🌍 Brasil na vanguarda mundial ao lado da União Europeia (Digital Services Act)</li>
+                        <li>⚖️ Responsabilização necessária das big techs</li>
+                        <li>🛡️ Combate efetivo à exploração e sexualização de menores</li>
+                        <li>🤝 Amplo consenso político (aprovação por unanimidade no Senado)</li>
+                        <li>📜 Reforço do princípio constitucional da proteção integral (art. 227, CF/88)</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Sen. Flávio Arns (relator):</strong></p>
+                    <p style="font-style: italic; margin-top: 10px;">"Estamos diante de um conjunto de regras robusto, capaz de assegurar às crianças e aos adolescentes que acessam ambientes virtuais os mesmos direitos e proteções que já existem no mundo real."</p>
+                </div>
+
+                <h3>⚠️ Principais Preocupações</h3>
+
+                <h4>1. Risco de Inviabilização de Serviços</h4>
+                <div class="alert-box">
+                    <ul>
+                        <li>💸 Custos elevados de implementação de sistemas confiáveis de verificação de idade</li>
+                        <li>🏢 Pequenas empresas e startups podem não conseguir arcar com custos</li>
+                        <li>📈 Risco de concentração de mercado nas big techs (únicas com recursos para compliance)</li>
+                        <li>🌎 <strong>Exemplo BlueSky (Mississippi, EUA):</strong> plataforma bloqueou estado inteiro por não conseguir custear verificação</li>
+                    </ul>
+                </div>
+
+                <div class="danger-box">
+                    <p><strong>Colunista Thiago Ayub (TecMundo):</strong></p>
+                    <p style="font-style: italic; margin-top: 10px;">"De todos os produtos tecnológicos que você utiliza, quantos possuem CNPJ, escritório em SP ou advogado no Brasil? A lei pode resultar em concentração de mercado nas big techs, ironicamente enquanto o próprio legislativo propõe leis para reduzir nossa dependência delas."</p>
+                </div>
+
+                <h4>2. Privacidade e Proteção de Dados</h4>
+                <div class="alert-box">
+                    <p><strong>Dilema:</strong> Verificação de idade confiável exige coleta de dados pessoais sensíveis</p>
+                    <ul>
+                        <li>🆔 Documentos oficiais (CPF, RG)</li>
+                        <li>👁️ Dados biométricos (reconhecimento facial)</li>
+                        <li>💳 Dados financeiros (cartão de crédito)</li>
+                        <li>🔓 Risco de vazamentos e uso indevido</li>
+                        <li>🇬🇧 Experiência britânica mostra desafios de privacidade em sistemas de age verification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 21: CRÍTICAS E DESAFIOS (2) -->
+            <div class="slide">
+                <h2>Críticas e Desafios (2/2)</h2>
+
+                <h4>3. Definição de Conteúdo Impróprio</h4>
+                <div class="alert-box">
+                    <ul>
+                        <li>🤔 Conceito amplo e subjetivo do que é "inadequado" para diferentes faixas etárias</li>
+                        <li>👶 O que é inadequado para criança de 8 anos pode não ser para adolescente de 16</li>
+                        <li>📏 Falta de parâmetros objetivos claros</li>
+                        <li>⚖️ Risco de censura excessiva ou inconsistente</li>
+                        <li>📋 Resolução CONANDA nº 245/2024 busca diretrizes, mas carece de regulamentação prática</li>
+                    </ul>
+                </div>
+
+                <h4>4. Tensão com Neutralidade de Rede</h4>
+                <div class="alert-box">
+                    <p><strong>Questão:</strong> Como compatibilizar neutralidade de rede (Marco Civil) com bloqueio seletivo de conteúdos nocivos?</p>
+                    <ul>
+                        <li>📜 Marco Civil consagrou princípio da neutralidade (não discriminação de tráfego)</li>
+                        <li>⚖️ Lei Felca exige bloqueio/remoção de conteúdos específicos</li>
+                        <li>🤝 Necessária ponderação entre neutralidade e proteção integral da criança/adolescente</li>
+                    </ul>
+                </div>
+
+                <h4>5. Desafios Técnicos de Verificação de Idade</h4>
+                <div class="danger-box">
+                    <p><strong>🔐 Dilema Central:</strong> Como verificar idade de forma confiável sem violar privacidade?</p>
+                    <ul>
+                        <li>📄 <strong>Documentos oficiais (CPF, RG):</strong> risco de fraude e vazamento</li>
+                        <li>👁️ <strong>Reconhecimento facial biométrico:</strong> invasivo e questionável</li>
+                        <li>💳 <strong>Cartão de crédito:</strong> exclui quem não possui</li>
+                        <li>🏢 <strong>Certificação por terceiros:</strong> custos elevados e complexidade</li>
+                        <li>❌ <strong>Autodeclaração:</strong> vedada por ser facilmente burlável</li>
+                    </ul>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <p><strong>Art. 12, parágrafo único:</strong> Poder público pode atuar como <strong>regulador, certificador ou promotor</strong> de soluções técnicas de verificação</p>
+                    </div>
+                </div>
+
+                <h4>6. Eficácia da Fiscalização e Educação Digital</h4>
+                <div class="alert-box">
+                    <ul>
+                        <li>🗝️ ANPD com estrutura ainda em consolidação</li>
+                        <li>🌐 Plataformas globais operam sob legislações diversas - necessidade de cooperação internacional</li>
+                        <li>🏢 Dificuldade de fiscalizar empresas sem presença física no Brasil</li>
+                        <li>🎭 Facilidade com que menores burlam sistemas de cadastro/verificação</li>
+                        <li>📚 <strong>Lacuna crítica:</strong> Lei não detalha implementação de educação digital nas escolas</li>
+                        <li>👨‍🏫 Necessidade urgente de educação digital como política pública permanente</li>
+                    </ul>
+                </div>
+
+                <h4>7. Preocupação com Censura e Regulação Excessiva</h4>
+                <div class="danger-box">
+                    <p><strong>Sen. Carlos Portinho (PL-RJ) - voto contrário:</strong></p>
+                    <p style="font-style: italic; margin-top: 10px;">"A causa é nobre, mas esse pode ser o começo de uma regulação mais dura das plataformas. Depois que abrir essa porteira, o controle das redes sociais não se fecha mais."</p>
+                    <ul style="margin-top: 15px;">
+                        <li>⚠️ Lei pode servir de pretexto para controle estatal mais amplo sobre internet</li>
+                        <li>⚖️ Necessário equilibrar proteção infantil com liberdade de expressão</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 22: CONCLUSÃO -->
+            <div class="slide">
+                <h2>Conclusão e Perspectivas</h2>
+
+                <div class="success-box">
+                    <h4>🎯 Síntese</h4>
+                    <p>A <strong>Lei Felca</strong> representa avanço significativo e necessário na proteção jurídica de crianças e adolescentes brasileiros em ambientes digitais. Coloca o Brasil em posição de <strong>vanguarda internacional</strong> ao lado da União Europeia.</p>
+                </div>
+
+                <h3>Próximos Passos</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4>📋 Regulamentação</h4>
+                        <ul>
+                            <li>Decretos do Poder Executivo</li>
+                            <li>Resoluções da ANPD</li>
+                            <li>Guias de compliance</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🏛️ Análise de Vetos</h4>
+                        <ul>
+                            <li>Prazo: 30 dias</li>
+                            <li>Sessão conjunta do Congresso</li>
+                            <li>Maioria absoluta para derrubar</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 Fiscalização</h4>
+                        <ul>
+                            <li>Estruturação da ANPD</li>
+                            <li>Canais de denúncia</li>
+                            <li>Auditorias e relatórios</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🌐 Cooperação Internacional</h4>
+                        <ul>
+                            <li>Acordos bilaterais</li>
+                            <li>Tratados multilaterais</li>
+                            <li>Harmonização regulatória</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Inovações Trazidas pela Lei</h3>
+                <ul>
+                    <li>🎰 <strong>Proibição absoluta de loot boxes</strong> para menores (pioneira mundial)</li>
+                    <li>🗝️ <strong>Privacy/Safety by Design</strong> expressamente consagrado</li>
+                    <li>❌ <strong>Vedação da autodeclaração</strong> como método de verificação de idade</li>
+                    <li>📊 <strong>Relatórios semestrais obrigatórios</strong> de transparência</li>
+                    <li>💰 <strong>Monetização vedada</strong> de conteúdos sexualizados envolvendo menores</li>
+                    <li>🔗 <strong>Responsabilidade solidária</strong> de toda cadeia digital</li>
+                    <li>🏛️ <strong>Autoridade autônoma específica</strong> (ANPD) para ambiente digital infantil</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h4>🔑 Questão Central</h4>
+                    <p>A eficácia da Lei Felca dependerá menos do texto normativo — já robusto — e mais da <strong>capacidade institucional de implementação</strong>, da <strong>regulamentação técnica adequada</strong> e do <strong>compromisso social</strong> com proteção integral da infância.</p>
+                </div>
+
+                <div class="alert-box" style="text-align: center; margin-top: 30px;">
+                    <p style="font-size: 1.3em;"><strong>Data de Vigência: 17 de março de 2026</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button id="prevBtn" onclick="changeSlide(-1)">◀ Anterior</button>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <button id="nextBtn" onclick="changeSlide(1)">Próximo ▶</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function changeSlide(direction) {
+            const oldSlide = currentSlide;
+            currentSlide += direction;
+
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+
+            if (oldSlide !== currentSlide) {
+                slides[oldSlide].classList.remove('active');
+                slides[oldSlide].classList.add('previous');
+
+                setTimeout(() => {
+                    slides[oldSlide].classList.remove('previous');
+                }, 600);
+
+                slides[currentSlide].classList.add('active');
+                slides[currentSlide].scrollTop = 0;
+
+                updateSlideCounter();
+                updateButtons();
+
+                const direction_indicator = document.createElement('div');
+                direction_indicator.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    ${direction > 0 ? 'right: 20px' : 'left: 20px'};
+                    transform: translateY(-50%);
+                    font-size: 3em;
+                    color: rgba(192, 192, 192, 0.6);
+                    animation: slideIndicator 0.6s ease-out;
+                    pointer-events: none;
+                    z-index: 1000;
+                `;
+                direction_indicator.textContent = direction > 0 ? '→' : '←';
+                document.body.appendChild(direction_indicator);
+
+                setTimeout(() => direction_indicator.remove(), 600);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIndicator {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-50%) scale(0.5);
+                }
+                50% {
+                    opacity: 1;
+                    transform: translateY(-50%) scale(1.2);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-50%) scale(0.8);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        let headerClicks = 0;
+        document.querySelector('.header h1').addEventListener('click', function() {
+            headerClicks++;
+            if (headerClicks === 3) {
+                const easter = document.createElement('div');
+                easter.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(26, 26, 26, 0.95);
+                    backdrop-filter: blur(20px);
+                    padding: 40px;
+                    border-radius: 16px;
+                    border: 2px solid rgba(192, 192, 192, 0.4);
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+                    z-index: 10000;
+                    text-align: center;
+                    animation: fadeInUp 0.5s ease-out;
+                `;
+                easter.innerHTML = `
+                    <div style="font-size: 2em; margin-bottom: 20px;">✨</div>
+                    <h3 style="background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px;">Apresentação Premium</h3>
+                    <p style="color: #a0a0a0; margin-bottom: 20px;">Criada com dedicação para a PUC-SP<br/>Design refinado • Animações suaves • Visual Law</p>
+                    <button onclick="this.parentElement.remove(); headerClicks = 0;" style="margin-top: 10px;">Fechar</button>
+                `;
+                document.body.appendChild(easter);
+                headerClicks = 0;
+                setTimeout(() => {
+                    if (easter.parentElement) easter.remove();
+                }, 5000);
+            }
+            setTimeout(() => { headerClicks = 0; }, 1000);
+        });
+
+        document.addEventListener('fullscreenchange', function() {
+            const isFullscreen = document.fullscreenElement;
+            const indicator = document.getElementById('fullscreen-indicator') || (() => {
+                const div = document.createElement('div');
+                div.id = 'fullscreen-indicator';
+                div.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(192, 192, 192, 0.15);
+                    backdrop-filter: blur(8px);
+                    padding: 8px 16px;
+                    border-radius: 20px;
+                    font-size: 0.85em;
+                    color: #c0c0c0;
+                    z-index: 9999;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                `;
+                document.body.appendChild(div);
+                return div;
+            })();
+
+            if (isFullscreen) {
+                indicator.textContent = '🎬 Modo Apresentação';
+                indicator.style.opacity = '1';
+                setTimeout(() => { indicator.style.opacity = '0'; }, 3000);
+            }
+        });
+
+        window.addEventListener('load', function() {
+            const shortcuts = document.createElement('div');
+            shortcuts.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(26, 26, 26, 0.95);
+                backdrop-filter: blur(12px);
+                padding: 16px 24px;
+                border-radius: 12px;
+                border: 1px solid rgba(192, 192, 192, 0.2);
+                z-index: 9999;
+                opacity: 0;
+                animation: fadeInOut 4s ease-in-out;
+                pointer-events: none;
+                text-align: center;
+            `;
+            shortcuts.innerHTML = `
+                <div style="color: #c0c0c0; font-size: 0.9em; font-weight: 600; margin-bottom: 8px;">⌨️ Atalhos do Teclado</div>
+                <div style="color: #a0a0a0; font-size: 0.85em;">
+                    <kbd style="background: rgba(192, 192, 192, 0.15); padding: 2px 8px; border-radius: 4px; margin: 0 4px;">←</kbd> Anterior
+                    <kbd style="background: rgba(192, 192, 192, 0.15); padding: 2px 8px; border-radius: 4px; margin: 0 4px;">→</kbd> Próximo
+                    <kbd style="background: rgba(192, 192, 192, 0.15); padding: 2px 8px; border-radius: 4px; margin: 0 4px;">F11</kbd> Fullscreen
+                </div>
+            `;
+
+            const keyframesStyle = document.createElement('style');
+            keyframesStyle.textContent = `
+                @keyframes fadeInOut {
+                    0%, 100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+                    15%, 85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+                }
+            `;
+            document.head.appendChild(keyframesStyle);
+            document.body.appendChild(shortcuts);
+
+            setTimeout(() => shortcuts.remove(), 4000);
+        });
+
+        updateButtons();
+        updateSlideCounter();
+    </script>
+</body>
+</html>
